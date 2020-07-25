@@ -106,6 +106,10 @@ class DemoFrame
 		repaint();
 	}
 
+	private void smoothScrollingChanged() {
+		UIManager.put( "ScrollPane.smoothScrolling", smoothScrollingMenuItem.isSelected() );
+	}
+
 	private void animatedLafChangeChanged() {
 		System.setProperty( "flatlaf.animatedLafChange", String.valueOf( animatedLafChangeMenuItem.isSelected() ) );
 	}
@@ -256,6 +260,7 @@ class DemoFrame
 		menuBarEmbeddedCheckBoxMenuItem = new JCheckBoxMenuItem();
 		underlineMenuSelectionMenuItem = new JCheckBoxMenuItem();
 		alwaysShowMnemonicsMenuItem = new JCheckBoxMenuItem();
+		smoothScrollingMenuItem = new JCheckBoxMenuItem();
 		animatedLafChangeMenuItem = new JCheckBoxMenuItem();
 		JMenu helpMenu = new JMenu();
 		JMenuItem aboutMenuItem = new JMenuItem();
@@ -511,6 +516,12 @@ class DemoFrame
 				alwaysShowMnemonicsMenuItem.addActionListener(e -> alwaysShowMnemonics());
 				optionsMenu.add(alwaysShowMnemonicsMenuItem);
 
+				//---- smoothScrollingMenuItem ----
+				smoothScrollingMenuItem.setText("Smooth Scrolling");
+				smoothScrollingMenuItem.setSelected(true);
+				smoothScrollingMenuItem.addActionListener(e -> smoothScrollingChanged());
+				optionsMenu.add(smoothScrollingMenuItem);
+
 				//---- animatedLafChangeMenuItem ----
 				animatedLafChangeMenuItem.setText("Animated Laf Change");
 				animatedLafChangeMenuItem.setSelected(true);
@@ -635,6 +646,7 @@ class DemoFrame
 	private JCheckBoxMenuItem menuBarEmbeddedCheckBoxMenuItem;
 	private JCheckBoxMenuItem underlineMenuSelectionMenuItem;
 	private JCheckBoxMenuItem alwaysShowMnemonicsMenuItem;
+	private JCheckBoxMenuItem smoothScrollingMenuItem;
 	private JCheckBoxMenuItem animatedLafChangeMenuItem;
 	private JTabbedPane tabbedPane;
 	private ControlBar controlBar;
