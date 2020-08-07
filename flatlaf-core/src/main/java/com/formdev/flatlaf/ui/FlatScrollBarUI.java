@@ -372,7 +372,7 @@ public class FlatScrollBarUI
 			Object interpolator = UIManager.get( "ScrollPane.smoothScrolling.interpolator" );
 
 			animator = new Animator( duration, fraction -> {
-				if( !scrollbar.isShowing() ) {
+				if( scrollbar == null || !scrollbar.isShowing() ) {
 					animator.cancel();
 					return;
 				}
