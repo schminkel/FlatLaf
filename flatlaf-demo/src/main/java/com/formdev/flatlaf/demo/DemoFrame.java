@@ -25,6 +25,7 @@ import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.StyleContext;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatSystemProperties;
 import com.formdev.flatlaf.demo.extras.*;
 import com.formdev.flatlaf.demo.intellijthemes.*;
 import com.formdev.flatlaf.extras.FlatAnimatedLafChange;
@@ -104,6 +105,14 @@ class DemoFrame
 	private void alwaysShowMnemonics() {
 		UIManager.put( "Component.hideMnemonics", !alwaysShowMnemonicsMenuItem.isSelected() );
 		repaint();
+	}
+
+	private void animationChanged() {
+		boolean enabled = animationMenuItem.isSelected();
+		System.setProperty( FlatSystemProperties.ANIMATION, Boolean.toString( enabled ) );
+
+		smoothScrollingMenuItem.setEnabled( enabled );
+		animatedLafChangeMenuItem.setEnabled( enabled );
 	}
 
 	private void smoothScrollingChanged() {
@@ -260,6 +269,7 @@ class DemoFrame
 		menuBarEmbeddedCheckBoxMenuItem = new JCheckBoxMenuItem();
 		underlineMenuSelectionMenuItem = new JCheckBoxMenuItem();
 		alwaysShowMnemonicsMenuItem = new JCheckBoxMenuItem();
+		animationMenuItem = new JCheckBoxMenuItem();
 		smoothScrollingMenuItem = new JCheckBoxMenuItem();
 		animatedLafChangeMenuItem = new JCheckBoxMenuItem();
 		JMenu helpMenu = new JMenu();
@@ -515,6 +525,13 @@ class DemoFrame
 				alwaysShowMnemonicsMenuItem.setText("Always show mnemonics");
 				alwaysShowMnemonicsMenuItem.addActionListener(e -> alwaysShowMnemonics());
 				optionsMenu.add(alwaysShowMnemonicsMenuItem);
+				optionsMenu.addSeparator();
+
+				//---- animationMenuItem ----
+				animationMenuItem.setText("Animation");
+				animationMenuItem.setSelected(true);
+				animationMenuItem.addActionListener(e -> animationChanged());
+				optionsMenu.add(animationMenuItem);
 
 				//---- smoothScrollingMenuItem ----
 				smoothScrollingMenuItem.setText("Smooth Scrolling");
@@ -646,6 +663,7 @@ class DemoFrame
 	private JCheckBoxMenuItem menuBarEmbeddedCheckBoxMenuItem;
 	private JCheckBoxMenuItem underlineMenuSelectionMenuItem;
 	private JCheckBoxMenuItem alwaysShowMnemonicsMenuItem;
+	private JCheckBoxMenuItem animationMenuItem;
 	private JCheckBoxMenuItem smoothScrollingMenuItem;
 	private JCheckBoxMenuItem animatedLafChangeMenuItem;
 	private JTabbedPane tabbedPane;
