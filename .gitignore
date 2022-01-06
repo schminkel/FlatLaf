@@ -11,3 +11,4 @@ out/
 *.iws
 .vs/
 .vscode/
+.DS_Store
